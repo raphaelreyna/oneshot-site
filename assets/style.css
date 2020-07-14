@@ -3,7 +3,7 @@
 }
 
 #banner {
-  width: 30%;
+    width: 55%;
 }
 
 .centered {
@@ -26,4 +26,9 @@ li:before {
 li {
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+.example {
+    margin-top: 65px;
+    margin-botttom: 65px;
 }
