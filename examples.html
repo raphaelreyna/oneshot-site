@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>oneshot - first-come, first-HTTP-served</title>
+        <link rel="stylesheet" href="assets/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/style.css">
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+<body>
+	 <div class="title">
+                <image id="banner" src="assets/oneshot_neg_banner.png"/>
+                <br/>
+        <div class="centered">
+        <a class="github-button" href="https://github.com/raphaelreyna/oneshot/subscription" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-eye" data-show-count="true" aria-label="Watch raphaelreyna/oneshot on GitHub">Watch</a>
+        <a class="github-button" href="https://github.com/raphaelreyna/oneshot" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star raphaelreyna/oneshot on GitHub">Star</a>
+        <a class="github-button" href="https://github.com/raphaelreyna/oneshot/fork" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork raphaelreyna/oneshot on GitHub">Fork</a>
+        <a class="github-button" href="https://github.com/raphaelreyna/oneshot/issues" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-issue-opened" data-show-count="true" aria-label="Issue raphaelreyna/oneshot on GitHub">Issue</a>
+                </div>
+        </div>
+        <br/>
+
+	<h3 id="usecasesexamples">Use Cases &amp; Examples</h3>
+<h4 id="sendafile">Send a file</h4>
+<pre><code class="bash language-bash">$ oneshot path/to/file.txt
+</code></pre>
+<p>Then, from a browser (or any HTTP client) simply go to your computers I.P. address and the file download will be triggered.</p>
+<h4 id="sendafilesecurely">Send a file securely</h4>
+<pre><code class="bash language-bash">$ oneshot -U username -W path/to/file.txt
+</code></pre>
+<p>The <code>-W</code> option will cause oneshot to prompt you for a password.
+Oneshot also supports HTTPS, simply pass in the key and certificate using the <code>--tls-key</code> and <code>--tls-cert</code> flags.</p>
+<h4 id="receiveafile">Receive a file</h4>
+<pre><code class="bash language-bash">$ oneshot -u .
+</code></pre>
+<p>The <code>-u</code> option is used for receiving data from the client.
+A connecteing browser will be prompted to upload a file which oneshot then save to the current directory.</p>
+<h4 id="receiveafiletostandardout">Receive a file to standard out</h4>
+<pre><code class="bash language-bash">$ oneshot -u | jq '.first_name'
+</code></pre>
+<p>If the <code>-u</code> option is used and no directory is given, oneshot will write the received file to its standard out.</p>
+<h4 id="serveupafirstcomefirstservewebpage">Serve up a first-come-first-serve web page</h4>
+<pre><code class="bash language-bash">$ oneshot -D my/web/page.html
+</code></pre>
+<p>The <code>-D</code> flag tells oneshot to not trigger a download client-side.</p>
+<h4 id="sendtheresultsofalengthyprocess">Send the results of a lengthy process</h4>
+<pre><code class="bash language-bash">$ sudo apt update | oneshot -n apt-update.txt
+</code></pre>
+<p>Oneshot can transfer from its standard input; by default files are given a random name.
+The optional flag <code>-n</code> sets the name of the file.</p>
+<h4 id="waituntilsomeoneprovidescredentialstostartaprocessthensenditsoutput">Wait until someone provides credentials to start a process, then send its output</h4>
+<pre><code class="bash language-bash">$ oneshot -U "" -P password -c my_non-cgi_script.sh
+</code></pre>
+<p>Oneshot can run your scripts and programs in a CGI flexible CGI environment.
+Even non-CGI executables may be used; oneshot will provide its own default headers or you can set your own using the <code>-H</code> flag.
+Passing in an empty value (<code>""</code>) for <code>-U, --username</code> or <code>-P, --password</code> will result in a randomly generate username or password.</p>
+<h4 id="createasinglefireapiinasingleline">Create a single-fire api in a single line</h4>
+<pre><code class="bash language-bash">$ oneshot -D -S 'echo "hello $(jq -r '.name')!"'
+</code></pre>
+<p>Here, the <code>-S</code> flag tells oneshot to run its input as a shell command in a flexible CGI environment.</p>
+<h4 id="createa3waytransaction">Create a 3-way transaction</h4>
+<pre><code class="bash language-bash">$ oneshot -D -S 'oneshot -p 8081 some_asset.mp3'
+</code></pre>
+<p>In this scenario, Alice runs oneshot, Bob connects to Alice's machine and his browser hangs until Carol also connects; Bob then receives the mp3 file.</p>
+</body>
+</html>

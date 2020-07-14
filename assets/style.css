@@ -1,0 +1,29 @@
+.title {
+  text-align: center;
+}
+
+#banner {
+  width: 30%;
+}
+
+.centered {
+  text-align: center;
+  width: 70%;
+  margin: 40px auto 40px auto;
+}
+
+ul {
+	text-align: left;
+	list-style: none;
+	width: 450px;
+	margin: auto;
+}
+
+li:before {
+	content: "";
+}
+
+li {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

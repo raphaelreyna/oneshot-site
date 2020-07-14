@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>oneshot - first-come, first-HTTP-served</title>
+	<link rel="stylesheet" href="assets/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/style.css">
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+<body>
+	<div class="title">
+		<image id="banner" src="assets/oneshot_neg_banner.png"/>
+		<br/>
+	<div class="centered">
+	<a class="github-button" href="https://github.com/raphaelreyna/oneshot/subscription" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-eye" data-show-count="true" aria-label="Watch raphaelreyna/oneshot on GitHub">Watch</a>
+	<a class="github-button" href="https://github.com/raphaelreyna/oneshot" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star raphaelreyna/oneshot on GitHub">Star</a>
+	<a class="github-button" href="https://github.com/raphaelreyna/oneshot/fork" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork raphaelreyna/oneshot on GitHub">Fork</a>
+	<a class="github-button" href="https://github.com/raphaelreyna/oneshot/issues" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-issue-opened" data-show-count="true" aria-label="Issue raphaelreyna/oneshot on GitHub">Issue</a>
+		</div>
+		<h4>
+  			A single-fire, first-come; first-served HTTP server.<br/>
+  			Easily transfer files to and from your terminal and any browser on your local network.
+		</h4>
+	</div>
+	<br/>
+	<a href="manual.html">manual</a>
+	<br/>
+	<a href="examples.html">use cases and examples</a>
+	<div class="centered">
+		<h4>&#x1f4a1; How it works &#x1f4a1;</h4>
+		The first client to connect is allowed to attempt the file transfer.<br/>
+		All other clients attempting to connect during the transfer will be queued and allowed to attempt the transfer if the current client fails.<br/>
+		Once the transfer is succesful, all queued clients will receive 410 GONE status and oneshot will exit.<br/>
+	</div>
+	<br/>
+	<div class="centered">
+		<h4>&#10024; Features &#10024;</h4>
+		<ul>
+			<li>&#x1f4c4;&#x23ec;  Trigger download prompt in connecting browsers (can be disabled)</li>
+			<li>&#x1f4c4;&#x23eb;  Offers a minimalistic and JS-free site prompting users to select a file or type in text to upload</li>
+			<li>&#x2699; Serve from stdout and upload to stdin; oneshot is designed to be pipelined</li>
+			<li>&#x1f5e3;  Set custom HTTP headers</li>
+			<li>&#x1f510;  Encrypted file transfers via HTTPS</li>
+			<li>&#x1f50f;  Self-signed SSL/TLS certificates</li>
+			<li>&#x1f5dd;  Username and password authentication</li>
+			<li>&#x1f3b2;  Randomly generated authentication credentials</li>
+			<li>&#x1f4c1;&#x23ec; Send entire folders; oneshot will take care of compressing them into .zip or .tar.gz files</li> 
+			<li>&#x1f50e;  Allow others to easily connect to your computer; oneshot can register itself as an mDNS (Avahi/Bonjour) service</li>
+			<li>&#x26a1;  Run commands and programs when a client connects and send them the output; oneshot offers a forgiving CGI (RFC 3875) environment with defaultable headers.<br/> Use your non-CGI scripts to respond to HTTP traffic.</li>
+			<li>&#x2728;  and more!</li>
+		</ul>
+	</div>
+	<br/>
+	<div class="centered">
+  		<h4>&#x1f4be; Download & Install &#x1f4be;</h4>
+		<h5>Download binary (easiest method)</h5>
+		<code>
+curl -L https://github.com/raphaelreyna/oneshot/raw/master/install.sh | sudo bash
+		</code>
+		<br/><br/>
+		<h5>Brew</h5>
+		<code>
+brew tap raphaelreyna/homebrew-repo && brew install oneshot
+		</code>
+		<br/><br/>
+		<h5>Go get</h5>
+		<code>
+go get -u -v github.com/raphaelreyna/oneshot
+		</code>
+		<br/><br/>
+		<h5>Compiling from source</h5>
+		<code>
+git clone github.com/raphaelreyna/oneshot && cd oneshot && sudo make install
+		</code>
+		<br/><br/>
+		<h5>Windows executable</h5>
+		Head over to the <a href="https://github.com/raphaelreyna/oneshot/releases">releases page</a> and download the windows .zip file.<br/>
+		Windows users might be interested in checkout <a href="https://github.com/raphaelreyna/goneshot">Goneshot</a>(beta).<br/>
+		If for some reason, you would rather <em>not</em> use a command line,<br/>
+		<a href="https://github.com/raphaelreyna/goneshot">Goneshot</a>(beta) wraps oneshot with a GUI, which might be easier to use.<br/>
+		A macOS version will probably be made at some point.
+	</div>
+	<br/>
+	<div class="centered">
+		<h4>&#x2753; Frequently Asked Questions &#x2753;</h4>
+		<ul>
+			<li><b>What is this?</b><br/><i>Oneshot lets others on your local network use their browsers on their computers, phones or any other device to send or receive files from your computer.</i></li>
+			<li><b>Why would I use this over netcat/ssh/rsync/[insert other unixy tool here]?</b><br/><i>Most people either don't have access to these tools or don't care/know how to use them, but they do have a browser and they know how to use it. Wouldn't it be nice to share with them?</i></li>
+			<li><b>Why would I use this over [insert some other HTTP server here]?</b><br/><i>
+				There are several ways in which oneshot differs from other HTTP servers.
+				Mainly, oneshot is meant for 'one-and-done' type tasks; once the data to be transferred has been sucessfully transferred, oneshot will exit. This behavior, combined with its ability to serve from stdin and send uploaded data to stdout makes it ideal for pipelining and using in scripts.</i></li>
+		</ul>
+	</div>
+</body>
+<html>
+
